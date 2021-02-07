@@ -1,0 +1,15 @@
+{% load static %}
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Login</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'mainapp/css/style.css' %}">
+    </head>
+<h1>Login</h1>
+{{ error }}
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Sign In</button>
+    </form>
+New User? <a href="{% url 'signupuser' %}">Click here</a>

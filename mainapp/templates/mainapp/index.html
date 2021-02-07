@@ -1,0 +1,65 @@
+{% extends 'mainapp/navbar.html' %}
+{% block content %}
+{% load static %}
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>View List</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'mainapp/css/style.css' %}">
+    </head>
+    <body>
+        <div class="container mt-5">
+            <!-- top -->
+            <div class="row">
+                <div class="col-lg-6">
+                    <h1>View Grocery List</h1>
+                </div>
+
+                <div class="col-lg-6 float-right">
+                    <form action="{% url 'index' %}" method="POST">
+                        {% csrf_token %}
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <!-- Date Filtering-->
+                            <input type="date" class="form-control" required name="date">
+                        </div>
+                        <div class="col-lg-4">
+
+                            <input type="submit" class="btn btn-danger" value="filter">
+
+
+                        </div>
+
+                    </div>
+                     </form>
+                </div>
+
+            </div>
+
+            <!-- // top -->
+            <!-- Grocery Cards -->
+            <div class="row mt-4">
+                <!--- -->
+                <!-- Loop This -->
+                {% for item in items %}
+                <div class="col-lg-4">
+
+                    <a href="{% url 'viewitem' item.id %}"><div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title">{{ item.name }}</h5>
+                          <h6 class="card-subtitle mb-2 text-muted">{{ item.quantity }}</h6>
+                          <p class="text-success">{{ item.status }}</p>
+                        </div>
+                      </div>
+                        </a>
+                <br>
+                </div>
+
+                {% endfor %}
+                <!-- // Loop -->
+            </div>
+        </div>
+    </body>
+</html>
+{% endblock %}
